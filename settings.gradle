@@ -1,0 +1,4 @@
+rootProject.name = 'msa-spring-cloud'
+include 'ecommerce'
+include 'user-service'
+
