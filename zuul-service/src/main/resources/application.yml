@@ -1,0 +1,18 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: zuul-service #각각 마이크로 서비스마다 부여할 고유 아이디(중복 불가)  => 유레카에 대문자로 등록됨. (대소문자 구분x)
+  config:
+    import: "optional:configserver:"
+
+
+zuul:
+  routes:
+    first-service :
+      path: /first-service/**
+      url: http://localhost:8081
+    second-service:
+      path: /second-service/**
+      url: http://localhost:8082

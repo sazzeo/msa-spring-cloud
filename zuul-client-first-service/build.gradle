@@ -1,0 +1,17 @@
+
+
+dependencies {
+
+	//유레카 [클라이언트] 등록
+	implementation 'io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+}
+
+//버전 알아서 찾아주는 애
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

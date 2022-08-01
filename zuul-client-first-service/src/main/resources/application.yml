@@ -1,13 +1,11 @@
 server:
-  port: 0 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
-  #port: 9001 #클라이언트 포트
+  port: 8081 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
 
 spring:
   application:
-    name: user-service #각각 마이크로 서비스마다 부여할 고유 아이디(중복 불가)  => 유레카에 대문자로 등록됨. (대소문자 구분x)
+    name: zuul-client-first-service #각각 마이크로 서비스마다 부여할 고유 아이디(중복 불가)  => 유레카에 대문자로 등록됨. (대소문자 구분x)
   config:
     import: "optional:configserver:"
-
 
 #유레카 클라이언트 역할 기능 켜기
 eureka:
@@ -16,5 +14,3 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true #서버로부터 인스턴스들의 정보를 주기적으로 가져올 것인지?
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka  #유레카 서버의 위치를 등록함

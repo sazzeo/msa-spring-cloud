@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.2'
+    id 'org.springframework.boot' version '2.3.8.RELEASE'  //2.6.2에서 변경
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -7,8 +7,14 @@ repositories {
     mavenCentral()
 }
 
+
 test {
     useJUnitPlatform()
+}
+
+//제일 상위 프로젝트에는 build 할 jar 파일이 없으므로 꺼주기
+bootJar {
+    enabled(false)
 }
 
 configurations {
@@ -25,7 +31,7 @@ configurations {
 subprojects {
 
     group 'com.jy.study'
-    version '1.0-SNAPSHOT'
+    version '1.0-SNAPSHOT'  //빌드시 jar 파일 이름에 들어가게 됨.
     sourceCompatibility = "11"
 
     repositories {
@@ -34,7 +40,7 @@ subprojects {
 
 
     ext {
-        set('springCloudVersion', "2021.0.3")
+        set('springCloudVersion', "Hoxton.SR9")  //2021.0.3 에서 변경
     }
 
 
@@ -54,7 +60,7 @@ subprojects {
         compileOnly 'org.projectlombok:lombok'
 
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
 
 
     }
