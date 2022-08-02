@@ -28,6 +28,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
     }
 
     //사전인지, 사후인지 필터 지정
+    //pre : 사전  /  post: 사후
     @Override
     public String filterType() {
         return "pre";
