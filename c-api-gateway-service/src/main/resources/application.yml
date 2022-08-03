@@ -13,16 +13,34 @@ spring:
     name: api-gateway-service
   config:
     import: "optional:configserver:"
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: first-service
-#          uri: http://localhost:8081/
-#          predicates :
-#            - Path=/first-service/**
-#        - id: first-service
-#          uri: http://localhost:8082/
-#          predicates:
-#            - Path=/second-service/**
+  cloud:
+    gateway:
+      routes:
+        - id: first-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/first-service/**
+          filters: #필터 추가하기
+            #            - AddRequestHeader=first-request , first-request-header2  # key , value  => 필터 클래스 없이 그냥 등록하는 법. 단순 작업만 가능
+            #            - AddResponseHeader=first-response , first-response-header2
+            - CustomFilter
+        - id: first-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/second-service/**
+          filters:
+            #            - AddRequestHeader=second-request , second-request-header2
+            #            - AddResponseHeader=second-response , second-response-header2
+            - name: CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Spring Cloud Gateway GlobalFilter
+                preLogger: true
+                postLogger: true
+      default-filters: # 글로벌 필터 지정하기 => 항상 맨 처음에 시작 되어 가장 마지막에 끝남.
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
 
-#=======> ??? ??? ??? ???? ?? ?? ??
