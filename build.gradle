@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.8.RELEASE'  //2.6.2에서 변경
+    id 'org.springframework.boot' version '2.6.2'  //2.6.2에서 변경
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -40,7 +40,7 @@ subprojects {
 
 
     ext {
-        set('springCloudVersion', "Hoxton.SR9")  //2021.0.3 에서 변경
+        set('springCloudVersion', "2021.0.3")  //2021.0.3 에서 변경
     }
 
 
