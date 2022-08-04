@@ -1,6 +1,13 @@
 server:
   port: 8000
 
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 spring:
   application:
     name: zuul-service #각각 마이크로 서비스마다 부여할 고유 아이디(중복 불가)  => 유레카에 대문자로 등록됨. (대소문자 구분x)

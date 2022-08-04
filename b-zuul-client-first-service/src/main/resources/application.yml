@@ -1,5 +1,5 @@
 server:
-  port: 8081 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
+  port: 0 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
 
 spring:
   application:
@@ -12,5 +12,7 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} #인스턴스 id 부여해주기
   client:
-    register-with-eureka: false
-    fetch-registry: false #서버로부터 인스턴스들의 정보를 주기적으로 가져올 것인지?
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
