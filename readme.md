@@ -1,13 +1,13 @@
-# Gateway + Eureka
+# MSA Toy Project
 
 ```
-게이트웨이와 유레카로 로드밸런싱 해보기
+MSA Toy Project만들어보기
 ```
 
-1. Eureka Server 
-2. Gateway 
-3. Service 1
-4. Service 2
+1. d-user-service
+2. d-order-service
+3. d-gateway-service
+4. ecommerce (Eureka Server) 
 
 ## Eureka Server
 

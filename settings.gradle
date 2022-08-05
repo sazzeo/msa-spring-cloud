@@ -10,3 +10,6 @@ include 'b-zuul-client-second-service' //줄 클라이언트 서비스2
 include 'b-zuul-service' //줄 서버
 
 include 'c-api-gateway-service' //api 클라이언트 서비스
+
+include 'd-user-service'
+include 'd-gateway'
