@@ -1,0 +1,19 @@
+dependencies {
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
+    //h2 원활한 connect를 위해 버전 1.3으로 조정후 다시 올렸음.
+    //runtime scope로 실행
+    runtimeOnly 'com.h2database:h2'
+
+    implementation 'org.modelmapper:modelmapper:3.1.0' //데이터 바인딩을 쉽게 하기 위해 추가
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

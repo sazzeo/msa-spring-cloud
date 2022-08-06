@@ -13,3 +13,5 @@ include 'c-api-gateway-service' //api 클라이언트 서비스
 
 include 'd-user-service'
 include 'd-gateway'
+include 'd-catalog-service'
+include 'd-order-service'
