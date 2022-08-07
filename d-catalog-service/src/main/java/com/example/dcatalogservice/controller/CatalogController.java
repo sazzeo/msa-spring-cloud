@@ -23,7 +23,7 @@ public class CatalogController {
 
     @GetMapping("/health_check")
     public String status() {
-        return String.format("Catalog Service :: port = $s" , env.getProperty("local.server.port"));
+        return String.format("Catalog Service :: port = %s" , env.getProperty("local.server.port"));
     }
 
     @GetMapping("/catalogs")
