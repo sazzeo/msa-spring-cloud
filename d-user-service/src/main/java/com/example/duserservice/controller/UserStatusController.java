@@ -25,12 +25,6 @@ public class UserStatusController {
         this.env = env;
     }
 
-    //상태 체크 함수
-    @GetMapping("/health_check")
-    public String status() {
-        return String.format("User Service on Port %s" , env.getProperty("local.server.port"));
-    }
-
     @GetMapping("/welcome")
     public String welcome() {
         return env.getProperty("greeting.message");
