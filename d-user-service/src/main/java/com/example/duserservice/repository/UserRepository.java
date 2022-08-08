@@ -1,6 +1,5 @@
 package com.example.duserservice.repository;
 
-import com.example.duserservice.vo.UserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -11,5 +10,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity , Long> {
 
     Optional<UserEntity> findByUserId(String userId);
+
+    Optional<UserEntity> findByEmail(String email);
 
 }
