@@ -1,6 +1,8 @@
 package com.example.gateway.security;
 
 import com.example.gateway.vo.UserDto;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,10 @@ public class JwtTokenParser {
 
     public String getTokenSubject(String token) {
 
-        String subject = Jwts.parser().parseClaimsJws(token).getBody().getSubject();
+        String subject = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody().getSubject();
         return subject;
 
     }
@@ -32,11 +37,14 @@ public class JwtTokenParser {
     public boolean isValidToken(String validBearerToken) {
 
         try {
-            String subject = Jwts.parser().parseClaimsJws(validBearerToken).getBody().getSubject();
+            Jws<Claims> claimsJws = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(validBearerToken);
+            return true;
         } catch (Exception e) {
+            log.info(e.getMessage());
             return false;
         }
-        return true;
     }
 
     public String getToken(String validBearerToken) {

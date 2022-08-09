@@ -56,6 +56,9 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
     }
 
+
+    //Mono 객체 : webflux에서 데이터 전달하는 객체임
+    //여기서 설정하는 httpstatus가 실제 response 되는 status가 됨.
     private Mono<Void> onError( ServerHttpResponse response , String err, HttpStatus httpStatus)  {
         response.setStatusCode(httpStatus);
         log.error(err);
