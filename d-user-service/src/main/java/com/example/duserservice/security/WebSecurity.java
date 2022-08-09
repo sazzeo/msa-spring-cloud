@@ -1,7 +1,6 @@
 package com.example.duserservice.security;
 
 import com.example.duserservice.service.UserService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +27,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final Environment env;
 
+    private final JwtTokenProvider jwtTokenProvider;
+
+
     //권한에 관련된 부분 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,8 +37,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests().antMatchers("/**").permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter());  //UsernamePasswordAuthenticationFilter를 상속받는 클래스기 때문에 이자리로 대체 됨.
-
-
 
 
         http.headers().frameOptions().disable(); //h2 관련 권한 때문에 추가함
@@ -51,8 +51,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
-        authenticationFilter.setAuthenticationManager(authenticationManager());
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager() , userService , env, jwtTokenProvider);
         return authenticationFilter;
     }
+
 }

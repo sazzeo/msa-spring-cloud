@@ -19,11 +19,13 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
 
     @Override
     public GatewayFilter apply(Config config) {
+
         return (((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
-
             log.info("Global Filter baseMessage: {}", config.getBaseMessage());
+
+            //Mono객체 => 비동기로 값을 전달할 때 webflux에서 사용하는 데이터 객체 (단일값: mono , 다중값 : flux)
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {  //비동기 환경이기때문에 동적 파라미터로 호출함
                 if (config.isPostLogger()) {
                     log.info("Custom Filter End : response code -> {}", response.getStatusCode());

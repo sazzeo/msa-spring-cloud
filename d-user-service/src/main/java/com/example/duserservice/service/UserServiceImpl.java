@@ -74,5 +74,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
+    @Override
+    public UserDto findUserByEmail(String email) {
+        return new UserDto(userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("유저를 찾을 수 없음")));
+    }
 }

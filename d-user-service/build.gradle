@@ -10,6 +10,11 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     implementation 'org.modelmapper:modelmapper:3.1.0' //데이터 바인딩을 쉽게 하기 위해 추가
+
+    // jwt 토큰
+
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
 }
 
 dependencyManagement {

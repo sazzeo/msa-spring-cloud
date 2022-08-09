@@ -32,3 +32,8 @@ greeting:
 logging:
   level:
     com.example.duserservice : info
+
+
+#token:
+#  expiration_time: 86400000  #하루짜리 토큰
+#  secret:user_token
