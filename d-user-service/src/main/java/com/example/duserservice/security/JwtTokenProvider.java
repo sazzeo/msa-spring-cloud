@@ -22,6 +22,7 @@ public class JwtTokenProvider {
 
         String token = Jwts.builder()
                 .setSubject(userDto.getUserId())  //아이디 설정
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(now.getTime() + EXPIRATION_TIME))        //만료 시간
                 .signWith(SignatureAlgorithm.HS512 , SECRET_KEY)
                 .compact();
