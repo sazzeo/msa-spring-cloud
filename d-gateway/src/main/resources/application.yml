@@ -20,8 +20,16 @@ spring:
 #          uri: lb://USER-SERVICE
 #          predicates:
 #            - Path=/user-service/**
-          
-          ## user-service prefix 제거하기
+          #acturator정보
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET , POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}   # user-service prefix 제거하기
+
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -36,6 +44,15 @@ spring:
           predicates:
             - Path=/user-service/users #회원가입
             - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/health_check #포트체크
+            - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
@@ -66,3 +83,12 @@ spring:
             baseMessage : Spring Cloud Gateway GlobalFilter
             preLogger : true
             postLogger : true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh , health , beans , httptrace
+
+

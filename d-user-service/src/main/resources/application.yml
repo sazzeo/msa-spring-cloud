@@ -34,6 +34,16 @@ logging:
     com.example.duserservice : info
 
 
+
 #token:
 #  expiration_time: 86400000  #하루짜리 토큰
 #  secret:user_token
+
+#actuator 엔드 포인트를 더 사용하기 위해 추가  /actuator/refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh , health , beans
+
+

@@ -14,6 +14,12 @@ dependencies {
 
     //jwt토큰 parsing 하는데  Base64로 인코딩하는데 자바 11버전 부터는 기본 설정이 되지 않아 추가해야함.
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    //config
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.3'
+    //actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.2'
 }
 
 //버전 알아서 찾아주는 애

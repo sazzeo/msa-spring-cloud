@@ -12,8 +12,12 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.1.0' //데이터 바인딩을 쉽게 하기 위해 추가
 
     // jwt 토큰
-
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+    //spring config server 사용을 위한 의존성
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.3'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.2'  //spring cloud actuator
 
 }
 
