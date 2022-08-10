@@ -1,37 +1,33 @@
-# MSA Toy Project
+# Spring Cloud Config 
 
+``` text
+spring cloud config 로 yml파일 한번에 관리하기 
 ```
-MSA Toy Project만들어보기
-```
+1. e-config-service
+2. d-user-service
+3. d-gateway-service
+4. ecommerce (Eureka Server) 
 
-1. d-user-service
-2. d-order-service
-3. d-category-service
-4. d-gateway-service
-5. ecommerce (Eureka Server) 
+## Config
 
-## Eureka Server
-
-1.ecommerce
-
-
-## Service
-
-1. d-user-service
-2. d-order-service
-3. category-service
-
-
-### User Service
+1. e-config-service
 
 ```text
-- 스프링 sequrity로 로그인 서비스 구축
-- Authentication Filter 
-- jwt 로 토큰 발행후 Response 헤더 추가
+- Spring Cloud Config Server 의존성 추가
+- application.yml 파일에 remote / local git repository 주소 등록 설정
 ```
 
-## Gateway
 
-1. d-api-gateway-service
+## service
 
->AuthorizationHeaderFilter로 요청 token을 파싱해 유효값 확인
+1. d-user-service
+2. d-gateway-service
+
+
+```text
+- Spring Cloud Config 의존성 추가
+- actuator , bootstrap 의존성 추가
+- config-server 정보를 bootstrap.yml 파일에 추가
+- actuator endpoint 정보를 application.yml 파일에 추가 
+```
+

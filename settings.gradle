@@ -15,3 +15,5 @@ include 'd-user-service'
 include 'd-gateway'
 include 'd-catalog-service'
 include 'd-order-service'
+
+include 'e-config-service'

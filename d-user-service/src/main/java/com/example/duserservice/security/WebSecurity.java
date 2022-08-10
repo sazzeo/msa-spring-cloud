@@ -34,6 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .authorizeHttpRequests().antMatchers("/actuator/**").permitAll().and()  //actuator 엔드포인트 사용하기위해 열기
                 .authorizeHttpRequests().antMatchers("/**").permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter());  //UsernamePasswordAuthenticationFilter를 상속받는 클래스기 때문에 이자리로 대체 됨.

@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+#          uri: C:\code\study\msa-spring-cloud-config  # local git repository path
+          uri: https://github.com/sazzeo/mas-config-yml-repo  # remote git repository path
+#          username:   private repository 이용시 설정 추가
+#          password:
+
+
+# git이 아닌 로컬 폴더 이용시
+#spring:
+#  application:
+#    name: config-service
+#  profiles:
+#    active : native
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations:  #로컬 폴더명

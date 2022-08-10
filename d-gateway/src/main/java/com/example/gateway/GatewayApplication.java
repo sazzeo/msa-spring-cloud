@@ -1,7 +1,10 @@
 package com.example.gateway;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class GatewayApplication {
@@ -10,4 +13,10 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
+
+    //actuator httptrace 사용을 위해 등록
+    @Bean
+    public HttpTraceRepository httpTraceRepository() {
+        return new InMemoryHttpTraceRepository();
+    }
 }

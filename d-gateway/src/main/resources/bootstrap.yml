@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888   # config-server url
+      name: ecommerce  # *.yml name
+  profiles:
+    active: gateway  #application-profile.yml  중 profile 명 기입 
