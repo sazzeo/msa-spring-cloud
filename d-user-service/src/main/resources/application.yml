@@ -15,6 +15,13 @@ spring:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
 
+ # rabbitmq 정보
+  rabbitmq: #호스트 정보 기술 => ms는 클라이언트
+    host: 127.0.0.1
+    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
+    username: guest
+    password: guest
+
 #유레카 클라이언트 역할 기능 켜기
 eureka:
   instance:
@@ -44,6 +51,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh , health , beans
+        include: refresh , health , beans , busrefresh
 
 

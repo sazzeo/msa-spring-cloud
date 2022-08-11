@@ -84,11 +84,16 @@ spring:
             preLogger : true
             postLogger : true
 
+  rabbitmq: #호스트 정보 기술 => ms는 클라이언트
+    host: 127.0.0.1
+    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
+    username: guest
+    password: guest
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh , health , beans , httptrace
+        include: refresh , health , beans , httptrace , busrefresh
 
 
