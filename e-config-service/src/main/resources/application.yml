@@ -13,6 +13,12 @@ spring:
 #          username:   private repository 이용시 설정 추가
 #          password:
 
+  rabbitmq:  #호스트 정보 기술 => ms는 클라이언트
+    host: 127.0.0.1
+    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
+    username: guest
+    password: guest
+
 
 # git이 아닌 로컬 폴더 이용시
 #spring:
@@ -25,3 +31,8 @@ spring:
 #      server:
 #        native:
 #          search-locations:  #로컬 폴더명
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health , busrefresh  #host인 본인도 client 역할을 같이함.
