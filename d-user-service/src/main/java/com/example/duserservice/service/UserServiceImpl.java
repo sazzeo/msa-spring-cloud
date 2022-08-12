@@ -6,12 +6,16 @@ import com.example.duserservice.vo.ResponseOrder;
 import com.example.duserservice.vo.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,12 +28,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RestTemplate restTemplate;
 
     //@Lazy : 순환참조 에러로 @Lazy 추가
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, @Lazy PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository,
+                           ModelMapper modelMapper,
+                           @Lazy PasswordEncoder passwordEncoder ,
+                           RestTemplate restTemplate) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.restTemplate = restTemplate;
     }
 
     //UserDetailService Override
@@ -45,14 +54,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
-        userDto.setUserId(UUID.randomUUID().toString());
+        String id = userDto.getEmail().split("@")[0];
+        userDto.setUserId(id);
+
         userDto.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
         UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
         userRepository.save(userEntity);
 
         return userDto;
     }
-
+    
+    
+    //userId 찾고 order 정보도 함께 호출하기 =>restTemplate 이용
     @Override
     public UserDto findUserByUserId(String userId) {
         UserEntity userEntity = userRepository.findByUserId(userId).orElseThrow(() ->
@@ -61,8 +74,12 @@ public class UserServiceImpl implements UserService {
 
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
 
-        List<ResponseOrder> orders = new ArrayList<>();
-        userDto.setOrders(orders);
+        String orderUrl = String.format("http://ORDER-SERVICE/%s/orders" , userId);  //@LoadBalancer 사용으로 주소 바꿈
+        // ParameterizedTypeReference  :Generic 타입을 class로 넘겨줄 때 사용하는 객체
+        List<ResponseOrder> orderList = restTemplate.exchange(orderUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<ResponseOrder>>(){})
+                .getBody();
+
+        userDto.setOrders(orderList);
 
         return userDto;
     }

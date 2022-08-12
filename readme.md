@@ -1,44 +1,24 @@
-# Spring Cloud Config 
-
+# Micro Service 간 통신
 ``` text
-spring cloud config 로 yml파일 한번에 관리하기 
+RestTemplate 이용하기
 ```
-1. e-config-service
-2. d-user-service
-3. d-gateway-service
-4. ecommerce (Eureka Server) 
+- userService에서 RestTemplate 이용
+- @LoadBalancer 사용으로 url을 간략화 할 수 있다.
 
-## RabbitMq 설치 가이드
-
-[rabbitmq 설치 가이드 in Notion](https://absorbing-brain-061.notion.site/Rabbit-MQ-c093020f8d614a738e8903d3cd29878c)
-
-## 공통 Dependencies
-
-```text
-implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.2'
-implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.3'
-implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp:3.1.2'
+### Bean 등록
+```java
+    @Bean
+    @LoadBalanced 
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 ```
 
-- amqp : 메시지 지향 미들웨어용 개방형 표준 응용 프로토콜
-  - rabbitmq 사용을 위해 추가함
+### url 사용
 
-## yml 파일 설정
-
-```yaml
-spring:
-	rabbitmq:  
-	    host: 127.0.0.1
-	    port: 5672 
-	    username: guest
-	    password: guest
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include:  busrefresh
-```
-
-- rabbitMq server 주소와 정보 입력
-- busrefresh : 전체파일 refresh용 endpoint
+- 기존: http://lcoalhost:8000/order-service/*
+  - 게이트웨이 거친 버전 /order-service가 붙음
+  
+- 변경후 : http://ORDER-SERVICE/*
+  - 유레카에서 가져온 버전  http://localhost:0/* 와 동일함   
+  - /order-service가 제거 됨
