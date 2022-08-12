@@ -52,7 +52,9 @@ public class UserApiController {
     public ResponseEntity findUsers() {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.findUserByAll());
     }
-
+    
+    
+    //유저정보와 오더정보를 한번에 가져오기 (order : restTemplate 호출)
     @GetMapping("/users/{userId}")
     public ResponseEntity findUserByUserId(@PathVariable String userId) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.findUserByUserId(userId));
