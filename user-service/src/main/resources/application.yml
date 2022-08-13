@@ -1,6 +1,5 @@
 server:
-  port: 0 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
-  #port: 9001 #클라이언트 포트
+  port: 0
 
 spring:
   application:

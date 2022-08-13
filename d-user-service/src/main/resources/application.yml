@@ -1,6 +1,6 @@
-server:
-  port: 0 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
-  #port: 9001 #클라이언트 포트
+#server:
+#  port: 0 # port번호 0 : 랜덤 포트를 사용하겠다는 의미
+#  #port: 9001 #클라이언트 포트
 
 spring:
   application:
@@ -16,11 +16,12 @@ spring:
 #    driver-class-name: org.h2.Driver
 
  # rabbitmq 정보
-  rabbitmq: #호스트 정보 기술 => ms는 클라이언트
-    host: 127.0.0.1
-    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
-    username: guest
-    password: guest
+
+#  rabbitmq: #호스트 정보 기술 => ms는 클라이언트
+#    host: 127.0.0.1
+#    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
+#    username: guest
+#    password: guest
 
 #유레카 클라이언트 역할 기능 켜기
 eureka:
@@ -33,18 +34,10 @@ eureka:
       defaultZone: http://127.0.0.1:8761/eureka  #유레카 서버의 위치를 등록함
 
 
-greeting:
-  message: Welcome to the Simple E-commerce.
-
 logging:
   level:
-    com.example.duserservice : info
-
-
-
-#token:
-#  expiration_time: 86400000  #하루짜리 토큰
-#  secret:user_token
+    com.example.duserservice: INFO
+    com.example.duserservice.client : DEBUG
 
 #actuator 엔드 포인트를 더 사용하기 위해 추가  /actuator/refresh
 management:
