@@ -12,12 +12,12 @@ spring:
           uri: https://github.com/sazzeo/mas-config-yml-repo  # remote git repository path
 #          username:   private repository 이용시 설정 추가
 #          password:
-
-  rabbitmq:  #호스트 정보 기술 => ms는 클라이언트
-    host: 127.0.0.1
-    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
-    username: guest
-    password: guest
+#
+#  rabbitmq:  #호스트 정보 기술 => ms는 클라이언트
+#    host: 127.0.0.1
+#    port: 5672 # 15672 는 rabbit mq 관리 페이지 접속용
+#    username: guest
+#    password: guest
 
 
 # git이 아닌 로컬 폴더 이용시
