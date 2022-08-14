@@ -1,24 +1,36 @@
 # Micro Service 간 통신
 ``` text
-RestTemplate 이용하기
+OpenFeign 이용하기
 ```
-- userService에서 RestTemplate 이용
-- @LoadBalancer 사용으로 url을 간략화 할 수 있다.
+- userService에서 FeingClient를 이용한다.
+- @FeignClient 인터페이스를 작성한다.
 
-### Bean 등록
+## @FeignClient 인터페이스 작성
+
 ```java
-    @Bean
-    @LoadBalanced 
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+@FeignClient(name="order-service")
+public interface OrderServiceClient {
+
+  @GetMapping("/{userId}/orders")
+  List<ResponseOrder> getOrders(@PathVariable String userId);
+
+}
 ```
 
-### url 사용
+## 사용
 
-- 기존: http://lcoalhost:8000/order-service/*
-  - 게이트웨이 거친 버전 /order-service가 붙음
-  
-- 변경후 : http://ORDER-SERVICE/*
-  - 유레카에서 가져온 버전  http://localhost:0/* 와 동일함   
-  - /order-service가 제거 됨
+- 빈으로 주입받아 사용한다.
+
+```java
+  private final OrderServiceClient orderServiceClient;
+  //중략
+  List<ResponseOrder> orders = orderServiceClient.getOrders;
+
+```
+
+## 에러처리
+
+- ErrorDecoder interface를 구현한다
+- 이 인터페이스를 Bean으로 등록하면 ExceptionAdvice처럼 동작한다.
+
+- [ErrorDecoder구현 클래스 확인하기](https://github.com/sazzeo/msa-spring-cloud/blob/master/d-user-service/src/main/java/com/example/duserservice/error/FeignErrorDecoder.java)
