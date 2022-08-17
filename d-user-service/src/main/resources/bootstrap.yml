@@ -4,4 +4,4 @@ spring:
       uri: http://127.0.0.1:8888   # config-server url
       name: ecommerce  # *.yml name  => 여러개 설정시 , 로 구분자..
   profiles:
-    active: user-service , default
+    active: default , service , data

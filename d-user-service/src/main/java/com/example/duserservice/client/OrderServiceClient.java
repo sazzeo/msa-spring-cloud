@@ -12,7 +12,9 @@ import java.util.List;
 @FeignClient(name="order-service")
 public interface OrderServiceClient {
 
+
+    //feign Client에서는 PathVariable옵션에 value를 지정해줘야함..
     @GetMapping("/{userId}/orders")
-    List<ResponseOrder> getOrders(@PathVariable String userId);
+    List<ResponseOrder> getOrders(@PathVariable(value="userId") String userId);
 
 }
