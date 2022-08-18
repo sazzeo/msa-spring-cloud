@@ -1,6 +1,8 @@
 package com.example.dorderservice.controller;
 
 
+import com.example.dorderservice.kafka.KafkaCatalogProducerService;
+import com.example.dorderservice.kafka.KafkaOrderProducerService;
 import com.example.dorderservice.service.OrderService;
 import com.example.dorderservice.vo.OrderDto;
 import com.example.dorderservice.vo.RequestOrder;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,6 +23,10 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+
+    private final KafkaCatalogProducerService kafkaCatalogProducerService;
+
+    private final KafkaOrderProducerService kafkaOrderProducerService;
 
     private final ModelMapper modelMapper;
 
@@ -32,14 +39,27 @@ public class OrderController {
 
     //주문추가
     @PostMapping("/{userId}/orders")
-    public ResponseEntity<ResponseOrder> order(@PathVariable String userId
+    public ResponseEntity<ResponseOrder> addOrder(@PathVariable String userId
             , @RequestBody RequestOrder requestOrder) {
         requestOrder.setUserId(userId);
 
         OrderDto orderDto = modelMapper.map(requestOrder , OrderDto.class);
+        orderDto.setOrderId(UUID.randomUUID().toString());
+        orderDto.setTotalPrice(orderDto.getQty() * orderDto.getUnitPrice());
+
+        //catalog 정보 업데이트
+        kafkaCatalogProducerService.send("example-catalog-topic" , orderDto);
+
+        kafkaOrderProducerService.send("orders" ,orderDto);
+
+        /* jpa 이용하는 코드*/
         orderService.createOrder(orderDto);
 
+
+
+
         ResponseOrder responseOrder = modelMapper.map(orderDto , ResponseOrder.class );
+
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 

@@ -25,10 +25,6 @@ public class UserStatusController {
         this.env = env;
     }
 
-    @GetMapping("/welcome")
-    public String welcome() {
-        return env.getProperty("greeting.message");
-    }
 
     @GetMapping("/welcome2")
     public String welcome2() {

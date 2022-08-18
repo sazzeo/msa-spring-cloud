@@ -20,5 +20,4 @@ public class CatalogServiceApplication {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
     }
-
 }

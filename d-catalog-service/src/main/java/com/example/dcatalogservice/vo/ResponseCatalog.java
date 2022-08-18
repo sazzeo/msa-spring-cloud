@@ -15,7 +15,8 @@ public class ResponseCatalog {
     private String productId;
     private String productName; //name 추가
     private Integer unitPrice;
-    private String userId;
+
+    private Integer stock;
     private Date createdAt; //date 추가
 
 
@@ -24,6 +25,7 @@ public class ResponseCatalog {
         this.productName = catalogEntity.getProductName();
         this.unitPrice = catalogEntity.getUnitPrice();
         this.createdAt = catalogEntity.getCreatedAt();
+        this.stock = catalogEntity.getStock();
     }
 }
 
