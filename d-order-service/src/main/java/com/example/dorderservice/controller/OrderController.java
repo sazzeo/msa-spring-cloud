@@ -53,7 +53,7 @@ public class OrderController {
         kafkaOrderProducerService.send("orders" ,orderDto);
 
         /* jpa 이용하는 코드*/
-        orderService.createOrder(orderDto);
+       // orderService.createOrder(orderDto);
 
 
 

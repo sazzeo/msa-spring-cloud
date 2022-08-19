@@ -24,6 +24,8 @@ configurations {
 }
 
 
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
 
 //아래 프로젝트들 공통 설정 : subprojects
@@ -33,6 +35,7 @@ subprojects {
     group 'com.jy.study'
     version '1.0-SNAPSHOT'  //빌드시 jar 파일 이름에 들어가게 됨.
     sourceCompatibility = "11"
+    targetCompatibility = "11"
 
     repositories {
         mavenCentral()
@@ -72,5 +75,13 @@ subprojects {
         useJUnitPlatform()
     }
 
+}
+
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '11'
+        targetCompatibility = '11'
+    }
 }
 
