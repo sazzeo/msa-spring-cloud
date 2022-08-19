@@ -2,7 +2,7 @@
 rootProject.name = 'msa-spring-cloud'
 
 // bootJar
-include 'ecommerce'
+include 'a-eureka'
 include 'user-service'
 
 include 'b-zuul-client-first-service'  //줄 클라이언트 서비스1

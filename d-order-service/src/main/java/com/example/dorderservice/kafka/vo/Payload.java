@@ -19,7 +19,7 @@ public class Payload {
 
     @Builder
     public Payload(OrderDto orderDto) {
-        this.order_id = orderDto.getOrderId();
+        this.order_id = orderDto.getOrderId().split("-")[0] + "-kafka";
         this.user_id = orderDto.getUserId();
         this.product_id = orderDto.getProductId();
         this.qty = orderDto.getQty();

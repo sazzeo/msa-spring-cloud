@@ -1,36 +1,35 @@
 # Micro Service 간 통신
 ``` text
-OpenFeign 이용하기
-```
-- userService에서 FeingClient를 이용한다.
-- @FeignClient 인터페이스를 작성한다.
-
-## @FeignClient 인터페이스 작성
-
-```java
-@FeignClient(name="order-service")
-public interface OrderServiceClient {
-
-  @GetMapping("/{userId}/orders")
-  List<ResponseOrder> getOrders(@PathVariable String userId);
-
-}
+Kafka 이용하기
 ```
 
-## 사용
+## 다른 service 끼리 kafka 통신
+![image](https://user-images.githubusercontent.com/89112466/185573316-9431fb4c-8942-4e5b-9bff-99073c00d291.png)
+- sink 와 source를 service 내부의 kafka class로 구현함
+- kafka connector는 구동되어있어야함
 
-- 빈으로 주입받아 사용한다.
+## 동일 레플리카 service 끼리 kafka통신
+![image](https://user-images.githubusercontent.com/89112466/185573329-56414499-0de9-4385-b675-60de4d8cc6f1.png)
+- kafka connector 이용
+- kafka sink로 db에 직접 데이터 insert
+  - kafka sink 정보
+  ```yaml
+  {
+    "name": "my-order-sink-connect",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "connection.url": "jdbc:postgresql://spring-boot-study.cchzqclxtrke.ap-northeast-2.rds.amazonaws.com:5432/postgres",
+        "connection.user": "db id",
+        "connection.password": "db pw",
+        "auto.create": "true",
+        "auto.evolve": "true",
+        "table.name.format":"msa_study.${topic}",
+        "delete.enabled": "false",
+        "tasks.max": "1",
+        "topics": "orders"
+    }
+  }
+  ```
 
-```java
-  private final OrderServiceClient orderServiceClient;
-  //중략
-  List<ResponseOrder> orders = orderServiceClient.getOrders;
-
-```
-
-## 에러처리
-
-- ErrorDecoder interface를 구현한다
-- 이 인터페이스를 Bean으로 등록하면 ExceptionAdvice처럼 동작한다.
-
-- [ErrorDecoder구현 클래스 확인하기](https://github.com/sazzeo/msa-spring-cloud/blob/master/d-user-service/src/main/java/com/example/duserservice/error/FeignErrorDecoder.java)
+- 전송 data 포맷
+![image](https://user-images.githubusercontent.com/89112466/185574197-3b59d68c-4a8b-420d-9db8-9991c1a7e436.png)
