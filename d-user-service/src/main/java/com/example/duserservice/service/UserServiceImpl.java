@@ -5,12 +5,11 @@ import com.example.duserservice.repository.UserEntity;
 import com.example.duserservice.repository.UserRepository;
 import com.example.duserservice.vo.ResponseOrder;
 import com.example.duserservice.vo.UserDto;
-import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,10 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,17 +32,20 @@ public class UserServiceImpl implements UserService {
     private final RestTemplate restTemplate;
     private final OrderServiceClient orderServiceClient;
 
+    private final CircuitBreakerFactory circuitBreakerFactory;
+
     //@Lazy : 순환참조 에러로 @Lazy 추가
     public UserServiceImpl(UserRepository userRepository,
                            ModelMapper modelMapper,
                            @Lazy PasswordEncoder passwordEncoder,
                            RestTemplate restTemplate,
-                           OrderServiceClient orderServiceClient) {
+                           OrderServiceClient orderServiceClient, CircuitBreakerFactory circuitBreakerFactory) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.restTemplate = restTemplate;
         this.orderServiceClient = orderServiceClient;
+        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
     //UserDetailService Override
@@ -81,19 +81,11 @@ public class UserServiceImpl implements UserService {
 
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
 
-        //feign client로 부르기
 
-//        List<ResponseOrder> orderList = null;
-//
-//        try {
-//            orderList = orderServiceClient.getOrders(userId);
-//        } catch (FeignException e) {
-//            log.error(e.getMessage());
-//        }
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitBreaker");  //서킷 브레이커 이름
 
-
-        //에러핸들링 feignErrorDecoder로 이관
-        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+        List<ResponseOrder> orderList = circuitBreaker.run(()-> orderServiceClient.getOrders(userId) ,
+                throwable -> new ArrayList<>());
 
         userDto.setOrders(orderList);
 

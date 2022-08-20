@@ -18,18 +18,10 @@ public class UserStatusController {
 
 
     @Autowired
-    private Greeting greeting;
-
-    @Autowired
     public UserStatusController(Environment env) {
         this.env = env;
     }
 
-
-    @GetMapping("/welcome2")
-    public String welcome2() {
-        return greeting.getMessage();
-    }
 
 
 

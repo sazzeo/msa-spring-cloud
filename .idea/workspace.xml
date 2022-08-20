@@ -5,21 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4624057b-93eb-4e37-be3b-98968cff34f7" name="Changes" comment="intellij .idea 파일 추가">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d-order-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/d-order-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/kafka/vo/KafkaOrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/kafka/vo/KafkaOrderDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/kafka/vo/Payload.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-order-service/src/main/java/com/example/dorderservice/kafka/vo/Payload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/a-eureka/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/java/com/jy/study/ecommerce/EcommerceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/a-eureka/src/main/java/com/jy/study/ecommerce/Eureka.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/a-eureka/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce/src/test/java/com/jy/study/TempTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/a-eureka/src/test/java/com/jy/study/TempTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/config/Resilience4JConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d-user-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/d-user-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/config/MapperConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/controller/UserStatusController.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/controller/UserStatusController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/vo/Greeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/d-user-service/src/main/java/com/example/duserservice/vo/Greeting.java" afterDir="false" />
     </list>
     <list id="5107bcbf-7f9d-4333-abbf-3e14d52dbabb" name="msa-spring-cloud-9 encrypt" comment="service 간 호출 : restTemplate 이용" />
     <option name="SHOW_DIALOG" value="false" />
@@ -252,7 +244,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.msa-spring-cloud:d-order-service [bootJar]">
+  <component name="RunManager" selected="Gradle.msa-spring-cloud [build]">
     <configuration name="msa-spring-cloud [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -358,6 +350,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="CApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="msa-spring-cloud.c-api-gateway-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.capigatewayservice.CApiGatewayServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CatalogServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
       <module name="msa-spring-cloud.d-catalog-service.main" />
@@ -413,14 +412,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ZuulClientFirstServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="msa-spring-cloud.b-zuul-client-first-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jy.study.zuul.zuulclientfirstservice.ZuulClientFirstServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZuulClientSecondServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="msa-spring-cloud.b-zuul-client-second-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.zuulclientsecondservice.ZuulClientSecondServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZuulServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="msa-spring-cloud.b-zuul-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jy.study.zuul.zuulservice.ZuulServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Gradle.msa-spring-cloud:d-order-service [bootJar]" />
       <item itemvalue="Gradle.msa-spring-cloud:d-order-service [build]" />
       <item itemvalue="Gradle.msa-spring-cloud:d-order-service [clean]" />
       <item itemvalue="Gradle.msa-spring-cloud [clean]" />
       <item itemvalue="Gradle.msa-spring-cloud [build]" />
+      <item itemvalue="Spring Boot.CApiGatewayServiceApplication" />
+      <item itemvalue="Spring Boot.ZuulClientFirstServiceApplication" />
+      <item itemvalue="Spring Boot.ZuulServiceApplication" />
       <item itemvalue="Spring Boot.UserServiceApplication (1)" />
       <item itemvalue="Spring Boot.EurekaApplication" />
+      <item itemvalue="Spring Boot.ZuulClientSecondServiceApplication" />
       <item itemvalue="Spring Boot.UserServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServiceApplication" />
       <item itemvalue="Spring Boot.CatalogServiceApplication" />
@@ -429,11 +453,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.msa-spring-cloud [build]" />
+        <item itemvalue="Gradle.msa-spring-cloud [clean]" />
         <item itemvalue="Gradle.msa-spring-cloud:d-order-service [bootJar]" />
         <item itemvalue="Gradle.msa-spring-cloud:d-order-service [build]" />
         <item itemvalue="Gradle.msa-spring-cloud:d-order-service [clean]" />
-        <item itemvalue="Gradle.msa-spring-cloud [build]" />
-        <item itemvalue="Gradle.msa-spring-cloud [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -749,7 +773,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/a-eureka/src/main/java/com/jy/study/ecommerce/Eureka.java</url>
           <line>10</line>
-          <properties class="com.jy.study.ecommerce.Eureka" method="main">
+          <properties class="com.jy.study.ecommerce.Eureka">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
