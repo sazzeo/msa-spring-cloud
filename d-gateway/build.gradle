@@ -21,6 +21,7 @@ dependencies {
     //actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.2'
    // implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp:3.1.2'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.9.2'
 }
 
 //버전 알아서 찾아주는 애
