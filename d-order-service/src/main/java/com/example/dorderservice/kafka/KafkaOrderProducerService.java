@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaOrderProducerService {
 
+    //order service => postgre 로 데이터 전송
     private final KafkaTemplate kafkaTemplate;
     private final ObjectMapper objectMapper;
 
