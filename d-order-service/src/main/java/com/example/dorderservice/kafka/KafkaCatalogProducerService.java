@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaCatalogProducerService {
 
+    
+    //order service => catalog service로 데이터 전송하기
     private final KafkaTemplate kafkaTemplate;
     private final ObjectMapper objectMapper;
 

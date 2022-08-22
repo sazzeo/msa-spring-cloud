@@ -1,24 +1,16 @@
-#server:
-#  port: 0
-
 spring:
   application:
     name: order-service
-#  h2:
-#    console:
-#      enabled: true
-#      settings:
-#        web-allow-others: true
-#      path: /h2-console
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    compression:
+      enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0   #로그 보내는 확률 1.0 => 100% 다 보내기
   jpa:
     hibernate:
       ddl-auto: update
-#  datasource:
-#    url: jdbc:postgresql://spring-boot-study.cchzqclxtrke.ap-northeast-2.rds.amazonaws.com:5432/postgres
-#    username: jylim
-#    password: "!Tjs24fkdlwm"
-#    hikari:
-#      schema: msa_study #스키마 따로 지정하기옵션
 
 eureka:
   instance:
