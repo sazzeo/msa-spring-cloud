@@ -24,5 +24,4 @@ public class RequestUser {
     @Size(min=8 , message = "password must be equal or greater than 8 characters")
     private String pwd;
 
-
 }

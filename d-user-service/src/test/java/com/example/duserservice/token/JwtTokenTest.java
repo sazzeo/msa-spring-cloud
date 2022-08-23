@@ -9,10 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 
 public class JwtTokenTest {
-
     private static final String SECRET_KEY = "secret_key";
     private static final Long EXPIRATION_TIME = 1000 * 60 * 60L; //60분
-
 
     @Test
     public void jwtTest() {
@@ -28,8 +26,6 @@ public class JwtTokenTest {
                 .signWith(SignatureAlgorithm.HS512 , SECRET_KEY)
                 .claim("email" , userDto.getEmail())
                 .compact();
-
-        System.out.println(token);
 
     }
 }

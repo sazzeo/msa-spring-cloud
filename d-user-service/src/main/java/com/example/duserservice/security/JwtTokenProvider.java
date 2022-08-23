@@ -15,7 +15,6 @@ public class JwtTokenProvider {
     private static final String SECRET_KEY = "secret_key";
     private static final Long EXPIRATION_TIME = 1000 * 60 * 60L; //60분
 
-
     public String getBearerToken(UserDto userDto) {
 
         Date now = new Date();
@@ -30,6 +29,4 @@ public class JwtTokenProvider {
         return "Bearer " +token;
 
     }
-
-
 }
