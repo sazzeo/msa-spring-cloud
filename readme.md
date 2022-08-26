@@ -44,4 +44,16 @@
 - 대칭키, 비대칭키 이용
 
 ### 9. microservice-communication/rest-template
-- rest-template으로 microservice간 호출
+- rest-template으로 microservice 간 호출
+
+### 10. microservice-communication/open-feign
+- open feign으로 microservice 간 호출
+
+### 11. kafka
+- kafka와 kafka-connect 연결
+
+### 12. resilience4j
+- circuitBreaker 
+
+### 13. prometheus
+- zipkin, sleuth, prometheus, grafana
